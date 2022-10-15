@@ -16,8 +16,10 @@ Cub3D is a team project at 1337) that asks us to create a "3D" game engine with 
 
 ---
 
+</p>
+<p align="center">
 <img src="./images/cub3dm.png" width="150" height="150"/>
-
+<p/>
 ---
 
 ### Score :
