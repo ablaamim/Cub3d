@@ -26,7 +26,7 @@ Cub3D is a team project at 1337) that asks us to create a "3D" game engine with 
 
 </p>
 <p align="center">
-<img src="https://github.com/ablaamim/Cub3d/blob/main/images/score_125.png">
+<img src="https://github.com/ablaamim/cub3D/blob/master/images/score_125.png">
 <p/>
 
 
