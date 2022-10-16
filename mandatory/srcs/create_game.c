@@ -49,6 +49,11 @@ void	init_images(t_data *data)
 	{
 		data->imgs[i].addr = mlx_xpm_file_to_image(data->mlx, \
 											data->elm.path[i], &size, &size);
+		if (!data->imgs[i].addr)
+		{
+			puterror("Failed to load image");
+			exit(EXIT_FAILURE);
+		}
 		data->imgs[i].buffer = (int *)mlx_get_data_addr(data->imgs[i].addr, \
 											&data->imgs[i].bits_per_pixel, \
 											&data->imgs[i].line_length, \

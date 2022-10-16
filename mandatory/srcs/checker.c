@@ -127,7 +127,9 @@ void	check_map(char **map)
 			if ((map[i][j] == '0' || is_player(map[i][j])) && \
 				(!i || !map[i + 1] || !j || !map[i][j + 1] || \
 				map[i][j + 1] == ' ' || (j && map[i][j - 1] == ' ') || \
-				map[i + 1][j] == ' ' || (i && map[i - 1][j] == ' ')))
+				map[i + 1][j] == ' ' || (i && map[i - 1][j] == ' ') ||
+				!map[i][j + 1] || !(j && map[i][j - 1]) || \
+				!map[i + 1][j] || !(i && map[i - 1][j])))
 				exit(puterror("Invalid map"));
 		}
 	}
