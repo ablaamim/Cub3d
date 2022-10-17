@@ -6,11 +6,21 @@
 /*   By: aamajane <aamajane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:11:19 by aamajane          #+#    #+#             */
-/*   Updated: 2022/09/25 17:07:14 by aamajane         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:48:52 by ablaamim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+/*
+ * Entry poinf of our program :
+ *
+ * -> checker() : Parsing methods that may determine if the program will
+ *  continue to execution or display an error.
+ *
+ * -> Create_game() : Game loop containing execution of the program,
+ *  raycasting and mlx events.
+*/
 
 int	main(int ac, char **av)
 {
@@ -23,12 +33,20 @@ int	main(int ac, char **av)
 	return (0);
 }
 
+/*
+ * Display an error on stderr.
+*/
+
 int	puterror(char *str)
 {
 	ft_putendl_fd("Error", STDERR_FILENO);
 	ft_putendl_fd(str, STDERR_FILENO);
 	return (EXIT_FAILURE);
 }
+
+/*
+ * Dealocate mallocated memory.
+*/
 
 void	free_double_pointer(char **str)
 {

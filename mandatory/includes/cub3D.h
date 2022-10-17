@@ -6,7 +6,7 @@
 /*   By: aamajane <aamajane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:08:13 by aamajane          #+#    #+#             */
-/*   Updated: 2022/10/13 16:00:40 by aamajane         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:57:18 by ablaamim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@
 # define SOUTH		1
 # define EAST		2
 # define WEST		3
-
-typedef struct s_var
-{
-	char	**tab;
-	int		*rgb;
-	int		i;
-	int		j;
-}				t_var;
 
 typedef struct s_column
 {
@@ -105,6 +97,10 @@ typedef struct player
 	int		mov_direction;
 }				t_player;
 
+/*
+ * Map elements class :
+*/
+
 typedef struct s_elm
 {
 	char	**path;
@@ -115,6 +111,10 @@ typedef struct s_elm
 	int		map_width;
 	int		map_height;
 }				t_elm;
+
+/*
+ * Game data class :
+*/
 
 typedef struct s_data
 {
@@ -131,8 +131,8 @@ typedef struct s_data
 
 // checker.c
 void	checker(t_elm *elm, char *arg);
-void	check_elements(t_elm *elm, t_var *var, char **tmp_elm);
-int		*check_color(t_var *var, char *str);
+void	check_elements(t_elm *elm, char **tmp_elm);
+int		*check_color(char *str);
 char	*check_path(char *str);
 void	check_map(char **map);
 
@@ -193,26 +193,29 @@ void	projection_facing_side(t_data *data, int i);
 int		puterror(char *str);
 void	free_double_pointer(char **str);
 
-// utils_checker.c
+// utils_checker_1.c
 char	**read_file(char *arg);
 void	separate_file_elements(t_elm *elm, char ***tmp_elm, char **file);
+void	skip_spaces(char *str, int *i);
+int		map_is_valid(char **map, int i, int j);
+
+// utils_checker_2.c
 int		is_color(char *str, int **count);
 int		is_direction(char *str, int **count);
 int		*copy_rgb_color(char **tab);
+int		commas_number(char *str);
+int		create_trgb(int transparency, int red, int green, int blue);
 
 // utils_map.c
 int		map_width(char **map);
 int		map_height(char **map);
 int		map_has_wall_at(t_data *data, double x, double y);
 int		is_inside_map(t_data *data, double x, double y);
-void	skip_spaces(char *str, int *i);
 
 // utils_math.c
 double	distance_between_points(double x1, double y1, double x2, double y2);
 double	degree_to_radian(double angle);
 void	normalize_angle(double *angle);
-int		create_trgb(int transparency, int red, int green, int blue);
-int		commas_number(char *str);
 
 // get_next_line.c
 char	*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: aamajane <aamajane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:08:13 by aamajane          #+#    #+#             */
-/*   Updated: 2022/10/15 00:51:11 by aamajane         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:59:16 by ablaamim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@
 # define D_KEY			2
 # define A_KEY			0
 # define X_KEY			7
-# define KEY_R			15
-# define KEY_C			8
 # define UP_KEY			126
 # define DOWN_KEY		125
 # define RIGHI_KEY		124
@@ -60,13 +58,16 @@
 # define ESC_KEY		53
 # define KEY_SHIFT		257
 
-# define SHIFT_MODE		6
-# define NORMAL_MODE 	2
+# define SHIFT_MODE		8
+# define NORMAL_MODE 	4
 
+# define INTENSITY		500
 # define EPSILON		0.3
 
 # define MUSIC			"./bonus/assets/sound/doom.mp3"
-# define GUN			"./bonus/assets/sound/gun.mp3"
+# define GUNSHOT		"./bonus/assets/sound/gunshot.mp3"
+# define RELOAD			"./bonus/assets/sound/reload.mp3"
+# define DOOR			"./bonus/assets/sound/door.mp3"
 
 typedef enum e_name
 {
@@ -81,12 +82,6 @@ typedef enum e_name
 	door = 200,
 }			t_name;
 
-typedef enum e_music
-{
-	SONG,
-	GUN_SHOT
-}			t_music;
-
 typedef struct s_r
 {
 	int	txt_index;
@@ -96,14 +91,6 @@ typedef struct s_r
 	int	win_x;
 	int	win_y;
 }				t_r;
-
-typedef struct s_var
-{
-	char	**tab;
-	int		*rgb;
-	int		i;
-	int		j;
-}				t_var;
 
 typedef struct s_mini
 {
@@ -240,6 +227,10 @@ typedef struct s_weapon
 	int		target;
 }				t_weapon;
 
+/*
+ * Player data :
+*/
+
 typedef struct player
 {
 	double	x;
@@ -279,23 +270,23 @@ typedef struct s_data
 	t_ray		rays[NUM_RAYS];
 	t_column	column[NUM_RAYS];
 	double		dist_proj_plane;
-	t_music		music;
-	char		**afplay;
-	int			pid;
-	int			pid_gun;
+	int			pid_music;
+	int			pid_gunshot;
+	int			pid_reload;
+	int			pid_door;
 }				t_data;
 
 // checker.c
 void	checker(t_elm *elm, char *arg);
 char	**read_file(char *arg);
-int		check_map(char **map);
-int		map_width(char **map);
-int		map_height(char **map);
+void	check_map(char **map);
+int		map_is_valid(char **map, int i, int j);
 
 // create_game.c
 void	create_game(t_data *data);
 void	create_images(t_data *data);
 void	init_variables(t_data *data);
+void	random_wall(char ***map);
 
 // images_path.c
 void	images_path(t_data *data);
@@ -402,11 +393,11 @@ int		puterror(char *str);
 void	free_double_pointer(char **str);
 
 // utils_map.c
+int		map_width(char **map);
+int		map_height(char **map);
 char	map_content(t_data *data, double x, double y, int size);
 int		is_inside_map(t_data *data, double x, double y);
 int		is_wall(char c);
-void	random_wall(char ***map);
-void	draw_rect(t_data *data, int x, int y, int color);
 
 // utils_math.c
 double	distance_between_points(double x1, double y1, double x2, double y2);
@@ -419,6 +410,7 @@ int		increase_color_intensity(double distance, int color);
 int		sprites_number(char **map, char c);
 void	sprites_coordinates(t_sprite *sprites, char **map, char c);
 void	init_sprites_data(t_sprite *sprites, int sprites_num);
+void	draw_rect(t_data *data, int x, int y, int color);
 
 // get_next_line.c
 char	*get_next_line(int fd);
@@ -427,9 +419,7 @@ char	*get_line(char **stock, char **line);
 void	get_free(char **str);
 
 // music.c
-void	ft_afplay(t_data *data);
-void	ft_afplay_gun(t_data *data);
+void	ft_afplay(char *sound, int *pid);
 void	render_menu(t_data *data);
-void	ft_afplay_global(t_data *data);
 
 #endif

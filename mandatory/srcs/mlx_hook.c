@@ -6,11 +6,15 @@
 /*   By: aamajane <aamajane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:55:44 by aamajane          #+#    #+#             */
-/*   Updated: 2022/10/08 22:34:33 by aamajane         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:58:25 by ablaamim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+/*
+ * Events concerning every input signal sent from keyboard.
+*/
 
 int	key_press(int keycode, t_data *data)
 {

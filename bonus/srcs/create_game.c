@@ -6,7 +6,7 @@
 /*   By: aamajane <aamajane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:17:39 by aamajane          #+#    #+#             */
-/*   Updated: 2022/10/15 00:51:43 by aamajane         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:50:54 by aamajane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	create_game(t_data *data)
 	if (!data->mlx)
 		puterror("Failed to initialize mlx");
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
+	if (!data->win)
+		exit(puterror("Failed to create window"));
+	ft_afplay(MUSIC, &data->pid_music);
 	create_images(data);
 	images_path(data);
 	init_all_images(data, TILE_SIZE);
 	init_variables(data);
-	ft_afplay_global(data);
 	player_data(&data->player, data->elm.map);
 	enemy_data(&data->enemy.gsprite, data->elm.map);
 	random_wall(&data->elm.map);
@@ -37,6 +39,8 @@ void	create_game(t_data *data)
 void	create_images(t_data *data)
 {
 	data->main_img.addr = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->main_img.addr)
+		exit(puterror("Failed to create image"));
 	data->main_img.buffer = (int *)mlx_get_data_addr(data->main_img.addr, \
 											&data->main_img.bits_per_pixel, \
 											&data->main_img.line_length, \
@@ -44,6 +48,8 @@ void	create_images(t_data *data)
 	data->main_img.line_length /= 4;
 	data->minimap.addr = mlx_new_image(data->mlx, \
 											MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	if (!data->minimap.addr)
+		exit(puterror("Failed to create image"));
 	data->minimap.buffer = (int *)mlx_get_data_addr(data->minimap.addr, \
 											&data->minimap.bits_per_pixel, \
 											&data->minimap.line_length, \
@@ -72,8 +78,20 @@ void	init_variables(t_data *data)
 	data->enemy.dying_index = 0;
 	data->enemy.dying_timer = 0;
 	data->enemy.dead_num = -1;
-	data->afplay = (char **)malloc(sizeof(char *) * 3);
-	if (!data->afplay)
-		puterror("Failed to malloc afplay\n");
-	data->pid = 0;
+}
+
+void	random_wall(char ***map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while ((*map)[++i])
+	{
+		j = -1;
+		while ((*map)[i][++j])
+			if ((*map)[i][j] == '1')
+				(*map)[i][j] = (rand() % (MAX_WALL_NUM + 1 - MIN_WALL_NUM) + \
+								MIN_WALL_NUM) + '0';
+	}	
 }

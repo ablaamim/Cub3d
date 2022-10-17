@@ -1,7 +1,7 @@
 NO ./mandatory/assets/mossystone.xpm
 SO ./mandatory/assets/pikuma.xpm
 EA ./mandatory/assets/purplestone.xpm
-WE ./fuck.xpm
+WE ./mandatory/assets/redbrick.xpm
 
 F 64,64,64
 C 32,33,32
