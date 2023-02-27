@@ -2,8 +2,6 @@
 
 # cub3D :
 
----
-
 This is the second graphics project at 1337 school , our first RayCaster with miniLibX.
 
 ---
@@ -21,15 +19,6 @@ Cub3D is a team project at 1337) that asks us to create a "3D" game engine with 
 <img src="./images/cub3dm.png" width="150" height="150"/>
 <p/>
 ---
-
-### Score :
-
----
-
-</p>
-<p align="center">
-<img src="https://github.com/ablaamim/cub3D/blob/master/images/score_125.png">
-<p/>
 
 
 ---
